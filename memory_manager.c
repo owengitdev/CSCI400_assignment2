@@ -82,19 +82,29 @@ void expand_inventory() {
     int *quantities = NULL;
     
     // TODO: Allocate memory for item_ids array (3 integers)
-    
+    item_ids = (int *)malloc(initial_size * sizeof(int));
     
     // TODO: Check if malloc succeeded
     // If allocation failed, print "Failed to allocate item_ids" and return
-    
-    
-    
+    if (item_ids == NULL) {
+        printf("Failed to allocate item_ids\n");
+        return;
+    }
+
     // TODO: Allocate memory for quantities array (3 integers)
+    quantities = (int *)malloc(initial_size * sizeof(int));
     
     
     // TODO: Check if malloc succeeded for quantities
     // If allocation failed, print "Failed to allocate quantities" and return
-    
+    if (quantities == NULL) {
+        printf("Failed to allocate quantities\n");
+        free(item_ids);
+        return;
+    }
+
+
+    printf("Memory allocated for quantities successfully.\n");
     
     
     // Fill initial inventory
@@ -109,16 +119,24 @@ void expand_inventory() {
     
     // TODO: Use realloc to expand item_ids from 3 to 6 integers
     // Store the result back in item_ids    
-    
+    item_ids = (int *)realloc(item_ids, expanded_size * sizeof(int));
     // TODO: Check if realloc succeeded
-    
+    if (item_ids == NULL) {
+        printf("Failed to reallocate item_ids\n");
+        free(quantities);
+        return;
+    }
     
     
     // TODO: Use realloc to expand quantities from 3 to 6 integers
-    
+    quantities = (int *)realloc(quantities, expanded_size * sizeof(int));
     
     // TODO: Check if realloc succeeded
-    
+    if (quantities == NULL) {
+        printf("Failed to reallocate quantities\n");
+        free(item_ids);
+        return;
+    }
     
     
     // Add new items to expanded inventory
@@ -134,10 +152,10 @@ void expand_inventory() {
     }
     
     // TODO: Free the allocated memory for item_ids
-    
+    item_ids = (int *)realloc(item_ids, 0); // Freeing memory by reallocating to size 0
     
     // TODO: Free the allocated memory for quantities
-    
+    quantities = (int *)realloc(quantities, 0); // Freeing memory by reallocating to size 0
     
     printf("Memory freed successfully.\n");
 }
@@ -196,8 +214,7 @@ void memory_leak_fixed() {
         temp_item[0] = 300 + i;
         
         // TODO: Free the memory to prevent the leak
-        
-        
+        free(temp_item);
     }
     
     printf("Loop complete. Memory properly freed after each use.\n");
@@ -231,12 +248,17 @@ void safe_pointer_handling() {
     
     // TODO: Set player_health to NULL after freeing to avoid dangling pointer
     // This prevents accidentally using the freed memory
-    
-    
+    player_health = NULL;
+
+
     // TODO: Before using player_health, check if it's NULL
     // If it's not NULL, print the value. If it is NULL, print "Health data not available"
     // Hint: Use an if statement to check: if (player_health != NULL)
-    
+    if (player_health != NULL) {
+        printf("Player health: %d\n", *player_health);
+    } else {
+        printf("Health data not available.\n");
+    }
     
     
     
