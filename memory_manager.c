@@ -26,21 +26,29 @@ void create_inventory() {
     int *quantities = NULL;
     
     // TODO: Allocate memory for item_ids array (5 integers)
+    item_ids = (int *)malloc(inventory_size * sizeof(int));
     
     
     // TODO: Check if malloc succeeded by comparing item_ids to NULL
     // If allocation failed, print "Failed to allocate item_ids" and return
-    
-    
+    if (item_ids == NULL) {
+        printf("Failed to allocate item_ids\n");
+        return;
+    }
+    printf("Memory allocated for item_ids successfully.\n");
     
     // TODO: Allocate memory for quantities array (5 integers)
-    
+    quantities = (int *)malloc(inventory_size * sizeof(int));
     
     // TODO: Check if malloc succeeded for quantities
     // If allocation failed, print "Failed to allocate quantities" and return
-    
-    
-    
+    if (quantities == NULL) {
+        printf("Failed to allocate quantities\n");
+        free(item_ids);
+        return;
+    }
+    printf("Memory allocated for quantities successfully.\n");
+
     // Fill the inventory with starting items
     printf("Starting inventory:\n");
     for (int i = 0; i < inventory_size; i++) {
@@ -50,9 +58,10 @@ void create_inventory() {
     }
     
     // TODO: Free the allocated memory for item_ids
-    
+    free(item_ids);
     
     // TODO: Free the allocated memory for quantities
+    free(quantities);
     
     
     printf("Memory freed successfully.\n");
