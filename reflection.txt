@@ -1,0 +1,63 @@
+Memory Leak Observations 
+
+What specific line(s) of code in your inventory system caused the memory leak?
+I believe that line 182 to 183 and 213 to 214 cause the memory leak. In the terminal, I see that data leak had reached up to 
+3906KB in which is a lot to be honest. Freeing the memory most prevent even more memory leak than before. 
+
+If this code ran in a loop 1000 times, what would happen to memory usage? 
+What about if it ran continuously for days in a server application?
+
+When the code ran in a loop up to 1000 times, I believe the memory usage might be to high and I think that the memory will
+be overload with so much memory and might ran out of memory within the storage. 
+I generally believe that it may last days since looping 1000 times takes a while in order to reached the 1000th mark of the code running
+in the background. Running a loop up to 1000 times might cause the server application to be temporary  shut down until the loop is officially stop. 
+
+How did adding the free() call fix the problem?
+Adding free() mostly prevent any memory leak since without it, I believe that memory will be fully exposed and shown outside of coding
+and risk of hacking with in the coding project. free() is one of the most important code within the code in order to prevent any leaks from being exposed to the 
+public and staying within the code project. 
+
+
+
+
+Python vs C Memory Management
+
+
+In Python, you can write inventory = [] and append items without freeing memory. 
+List the specific manual tasks you had to perform in C that Python handles automatically (allocating, tracking, freeing).
+
+The manual tasks that I had to perform in order for the code to run properly in C is by implementing many if-else and for in order
+to set up the result after putting realloc within any int that requires it. Python makes things easier than C since Python does things automatically while C requires more 
+manually coding in order to run the project perfectly. In C, you have to manually code some if-else in case allocation failed to return any results. You also have to implement 
+extra code in case if realloc succeeded within the program.  C mostly cares about performance  and control while Python prioritize safety and convenience. 
+Doing Manual memory management is the best thing in C since it requires professional coding in order to prevent leaks and crashes.
+
+Based on Resource 3: How Python's Garbage Collection Works, explain what Python's garbage collector is actually 
+doing behind the scenes when you create and discard objects.
+
+Behind the scenes of Python(Garbage Collection), Python splits up the objects into 3 generations 
+in order to ensure how they can survived without being too dependent of one of the other. 
+The downside of splitting  generations is that Python automatically scan in order to ensure no errors 
+and in turn cause the CPU to increase. I think that Python mostly do all the automatic tasks within the background while you code. I believe that C 
+requires you to do more manual coding while python do the coding in the background. 
+
+
+
+
+
+Garbage Collection Trade-offs 
+
+
+Using Resource 3, explain why Python's garbage collector consumes CPU cycles and memory overhead.
+
+Python's garbage collector can cause huge downsides. For Example, Python can pause
+the program in order to scan the whole memory and in turn can pause hundreds of milliseconds.
+garbage  collector requires metadata in exactly every object in order to run the code
+smoothly. 
+
+Why would a systems programmer building an operating system or embedded device firmware choose C's manual 
+memory management despite the risk of leaks and crashes?
+
+I believe that a system programmers might understand how C works and knows that there are more solutions in order to reduce the risk
+of leaks and crashes is mostly implementing the free() after manually coding the if-else statements within the application. I believe the programmer
+will understand the full logic of C languages and can learn from mistakes and reducing risks. 
